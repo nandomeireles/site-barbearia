@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barbearia Kairos — Agende seu Horário</title>
+<title>Diogo Barbershop — Agende seu Horário</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -85,9 +85,7 @@
 
   .nav-cta:hover { background: var(--gold-light); color: var(--black) !important; }
 
-  @media (max-width: 700px) {
-    .nav-links { display: none; }
-  }
+  /* nav hide handled in responsive block */
 
   /* ── HERO ── */
   .hero {
@@ -395,9 +393,7 @@
     margin-top: 3rem;
   }
 
-  @media (max-width: 768px) {
-    .booking-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  }
+  /* booking-grid handled in responsive block */
 
   /* ── CALENDÁRIO ── */
   .calendar-wrap {
@@ -551,7 +547,7 @@
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+  /* form-grid handled in responsive block */
 
   .form-group {
     display: flex;
@@ -761,7 +757,7 @@
     margin-top: 3rem;
   }
 
-  @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  /* info-grid handled in responsive block */
 
   .info-block { }
 
@@ -899,6 +895,215 @@
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50%       { transform: translateX(-50%) translateY(8px); }
   }
+
+  /* ══════════════════════════════════════════
+     RESPONSIVE OVERHAUL — all breakpoints
+  ══════════════════════════════════════════ */
+
+  /* ── HAMBURGER MENU ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile menu drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,0.97);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .mobile-menu.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+  }
+  .mobile-menu a {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .mob-cta {
+    background: var(--gold);
+    color: var(--black) !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem !important;
+    font-weight: 500;
+    padding: 0.85rem 2.5rem;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+  }
+  .mobile-menu-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(201,168,76,0.3);
+    margin: 0.5rem 0;
+  }
+
+  /* ── LARGE DESKTOP (1200px+) ── */
+  @media (min-width: 1200px) {
+    nav { padding: 1rem 4rem; }
+    .section, .booking-inner, .reviews-inner, .info-section { max-width: 1200px; }
+  }
+
+  /* ── TABLET LANDSCAPE (900–1100px) ── */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  }
+
+  /* ── TABLET PORTRAIT (601–768px) ── */
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { padding: 0.85rem 1.25rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    .hero { padding: 5rem 1.5rem 3.5rem; min-height: 100svh; }
+    .logo-sub { letter-spacing: 3px; font-size: 0.7rem; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .cta-btn, .cta-btn-outline { width: 100%; max-width: 320px; justify-content: center; }
+
+    /* Sections */
+    .section { padding: 4rem 1.25rem; }
+    .booking-section { padding: 4rem 1.25rem; }
+    .reviews-section { padding: 4rem 1.25rem; }
+    .form-section { padding: 4rem 1.25rem; }
+    .info-section { padding: 4rem 1.25rem; }
+
+    /* Services */
+    .services-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; }
+
+    /* Booking */
+    .booking-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    /* Form */
+    .form-grid { grid-template-columns: 1fr; }
+    .submit-area { flex-direction: column; }
+    .btn-whatsapp, .btn-calendar { min-width: unset; width: 100%; }
+
+    /* Reviews */
+    .reviews-grid { grid-template-columns: 1fr; }
+
+    /* Info/map */
+    .info-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .map-placeholder { height: 200px; }
+
+    /* Footer */
+    footer { padding: 3rem 1.25rem 2rem; }
+    .footer-info { font-size: 0.78rem; }
+  }
+
+  /* ── MOBILE (max 600px) ── */
+  @media (max-width: 600px) {
+    /* Nav logo */
+    .nav-logo { font-size: 1rem; gap: 8px !important; }
+    .nav-logo img { width: 36px !important; height: 36px !important; }
+
+    /* Hero */
+    .hero { padding: 4.5rem 1rem 3rem; }
+    .badge { font-size: 0.65rem; letter-spacing: 2px; padding: 0.4rem 1rem; }
+    .logo-area img { width: 110px !important; height: 110px !important; }
+    .hero-divider { margin: 1.5rem auto; }
+    .scroll-indicator { display: none; }
+
+    /* Sections */
+    .section { padding: 3rem 1rem; }
+    .section-title { margin-bottom: 2rem; }
+    .booking-section { padding: 3rem 1rem; }
+    .reviews-section { padding: 3rem 1rem; }
+    .form-section { padding: 3rem 1rem; }
+    .info-section { padding: 3rem 1rem; }
+
+    /* Services — 2 columns on mobile */
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .service-card { padding: 1.25rem; }
+    .service-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .service-name { font-size: 0.88rem; }
+    .service-desc { font-size: 0.72rem; display: none; }
+    .service-tag { font-size: 0.6rem; }
+
+    /* Calendar */
+    .calendar-wrap { padding: 1.25rem; }
+    .cal-day { font-size: 0.78rem; }
+    .cal-day-name { font-size: 0.6rem; }
+
+    /* Time grid — 4 cols on small mobile */
+    .time-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .time-slot { font-size: 0.78rem; padding: 0.5rem 0.3rem; }
+
+    /* Form */
+    .form-input { font-size: 16px; } /* prevent iOS zoom */
+
+    /* Google badge */
+    .google-badge { flex-direction: column; gap: 4px; padding: 0.85rem 1.25rem; font-size: 0.8rem; }
+
+    /* Info */
+    .info-icon { font-size: 1.1rem; }
+    .info-val { font-size: 0.85rem; }
+
+    /* Footer */
+    footer { padding: 2.5rem 1rem 1.75rem; }
+    .footer-logo { font-size: 1.5rem; }
+    .footer-info { font-size: 0.75rem; line-height: 1.8; }
+  }
+
+  /* ── TINY PHONES (max 360px) ── */
+  @media (max-width: 360px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .time-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero-btns { gap: 0.75rem; }
+    .logo-area img { width: 90px !important; height: 90px !important; }
+  }
+
+  /* ── TOUCH TARGETS ── */
+  @media (hover: none) and (pointer: coarse) {
+    .cta-btn, .cta-btn-outline, .btn-whatsapp, .btn-calendar {
+      min-height: 52px;
+      font-size: 1rem;
+    }
+    .time-slot { min-height: 44px; }
+    .cal-day { min-height: 38px; min-width: 38px; }
+    .nav-cta { min-height: 44px; }
+    .hamburger { padding: 10px; }
+  }
+
+  /* ── SAFE AREA (iPhone notch/home bar) ── */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    footer { padding-bottom: calc(2.5rem + env(safe-area-inset-bottom)); }
+    .toast { bottom: calc(2rem + env(safe-area-inset-bottom)); }
+  }
+
 </style>
 </head>
 <body>
@@ -906,8 +1111,20 @@
 <div class="toast" id="toast"></div>
 
 <!-- NAV -->
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicos" onclick="closeMobileMenu()">Serviços</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#agendar" onclick="closeMobileMenu()">Agendar</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#depoimentos" onclick="closeMobileMenu()">Avaliações</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#contato" onclick="closeMobileMenu()">Contato</a>
+  <a href="#agendar" class="mob-cta" onclick="closeMobileMenu()">Agendar Agora</a>
+</div>
+
 <nav>
-  <div class="nav-logo">Kairos</div>
+  <div class="nav-logo" style="display:flex;align-items:center;gap:10px;"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QLaRXhpZgAATU0AKgAAAAgABAE7AAIAAAAFAAABSodpAAQAAAABAAABUJydAAEAAAAKAAACyOocAAcAAAEMAAAAPgAAAAAc6gAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVXNlcgAAAAWQAwACAAAAFAAAAp6QBAACAAAAFAAAArKSkQACAAAAAzUyAACSkgACAAAAAzUyAADqHAAHAAABDAAAAZIAAAAAHOoAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADIwMjY6MDU6MTEgMTQ6MTg6MDQAMjAyNjowNToxMSAxNDoxODowNAAAAFUAcwBlAHIAAAD/4QQXaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIvPjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMxLWQzM2Q3NTE4MmYxYiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj48eG1wOkNyZWF0ZURhdGU+MjAyNi0wNS0xMVQxNDoxODowNC41MjI8L3htcDpDcmVhdGVEYXRlPjwvcmRmOkRlc2NyaXB0aW9uPjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMxLWQzM2Q3NTE4MmYxYiIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIj48ZGM6Y3JlYXRvcj48cmRmOlNlcSB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPjxyZGY6bGk+VXNlcjwvcmRmOmxpPjwvcmRmOlNlcT4NCgkJCTwvZGM6Y3JlYXRvcj48L3JkZjpEZXNjcmlwdGlvbj48L3JkZjpSREY+PC94OnhtcG1ldGE+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPD94cGFja2V0IGVuZD0ndyc/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" alt="Diogo Barbershop Logo" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.4);"><span>Diogo Barbershop</span></div>
   <ul class="nav-links">
     <li><a href="#servicos">Serviços</a></li>
     <li><a href="#agendar">Agendar</a></li>
@@ -915,16 +1132,20 @@
     <li><a href="#contato">Contato</a></li>
     <li><a href="#agendar" class="nav-cta">Agendar Agora</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="badge">✂ Diadema — SP &nbsp;·&nbsp; Desde 2018</div>
+  <div class="badge">✂ Eldorado — Diadema, SP</div>
 
   <div class="logo-area">
-    <span class="logo-pre">Barbearia</span>
-    <div class="logo-text">Kairos</div>
-    <span class="logo-sub">O momento certo para o seu melhor visual</span>
+    <div style="margin-bottom:1.5rem;animation:fadeDown 0.6s ease both;"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QLaRXhpZgAATU0AKgAAAAgABAE7AAIAAAAFAAABSodpAAQAAAABAAABUJydAAEAAAAKAAACyOocAAcAAAEMAAAAPgAAAAAc6gAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVXNlcgAAAAWQAwACAAAAFAAAAp6QBAACAAAAFAAAArKSkQACAAAAAzUyAACSkgACAAAAAzUyAADqHAAHAAABDAAAAZIAAAAAHOoAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADIwMjY6MDU6MTEgMTQ6MTg6MDQAMjAyNjowNToxMSAxNDoxODowNAAAAFUAcwBlAHIAAAD/4QQXaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIvPjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMxLWQzM2Q3NTE4MmYxYiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj48eG1wOkNyZWF0ZURhdGU+MjAyNi0wNS0xMVQxNDoxODowNC41MjI8L3htcDpDcmVhdGVEYXRlPjwvcmRmOkRlc2NyaXB0aW9uPjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMxLWQzM2Q3NTE4MmYxYiIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIj48ZGM6Y3JlYXRvcj48cmRmOlNlcSB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPjxyZGY6bGk+VXNlcjwvcmRmOmxpPjwvcmRmOlNlcT4NCgkJCTwvZGM6Y3JlYXRvcj48L3JkZjpEZXNjcmlwdGlvbj48L3JkZjpSREY+PC94OnhtcG1ldGE+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPD94cGFja2V0IGVuZD0ndyc/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" alt="Diogo Barbershop Logo" style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid rgba(201,168,76,0.4);"></div>
+    <span class="logo-pre">Diogo</span>
+    <div class="logo-text">Barbershop</div>
+    <span class="logo-sub">Estilo e Precisão em cada detalhe</span>
   </div>
 
   <div class="hero-divider"></div>
@@ -981,39 +1202,21 @@
     </div>
 
     <div class="service-card" onclick="selectService(this)"
-         data-service="Barboterapia com Vapor de Ozônio" data-duration="50min">
+         data-service="Coloração de Cabelo" data-duration="90min">
       <div class="service-check">✔</div>
-      <div class="service-icon">💨</div>
-      <div class="service-name">Barboterapia com Vapor de Ozônio</div>
-      <div class="service-desc">Tratamento exclusivo com vapor ozonizado para higienização profunda e pele revitalizada.</div>
-      <div class="service-tag">exclusivo</div>
+      <div class="service-icon">🎨</div>
+      <div class="service-name">Coloração de Cabelo</div>
+      <div class="service-desc">Coloração profissional com produtos de qualidade para um resultado vibrante e duradouro.</div>
+      <div class="service-tag">coloração</div>
     </div>
 
     <div class="service-card" onclick="selectService(this)"
-         data-service="Barbearia Vintage" data-duration="60min">
+         data-service="Coloração de Sobrancelhas" data-duration="30min">
       <div class="service-check">✔</div>
-      <div class="service-icon">👑</div>
-      <div class="service-name">Barbearia Vintage</div>
-      <div class="service-desc">Experiência completa no estilo clássico: navalha, toalha quente, loção e acabamento de época.</div>
-      <div class="service-tag">vintage</div>
-    </div>
-
-    <div class="service-card" onclick="selectService(this)"
-         data-service="Bar e Barbearia" data-duration="90min">
-      <div class="service-check">✔</div>
-      <div class="service-icon">🥃</div>
-      <div class="service-name">Bar e Barbearia</div>
-      <div class="service-desc">Serviço completo com drink especial incluído. Relaxe enquanto cuida do seu visual.</div>
-      <div class="service-tag">exclusivo</div>
-    </div>
-
-    <div class="service-card" onclick="selectService(this)"
-         data-service="Cortes Infantis" data-duration="30min">
-      <div class="service-check">✔</div>
-      <div class="service-icon">🧒</div>
-      <div class="service-name">Cortes Infantis</div>
-      <div class="service-desc">Atendimento especial e carinhoso para os pequenos, com paciência e cuidado.</div>
-      <div class="service-tag">kids</div>
+      <div class="service-icon">✨</div>
+      <div class="service-name">Coloração de Sobrancelhas</div>
+      <div class="service-desc">Realce e defina suas sobrancelhas com coloração especializada.</div>
+      <div class="service-tag">sobrancelha</div>
     </div>
 
     <div class="service-card" onclick="selectService(this)"
@@ -1026,6 +1229,114 @@
     </div>
 
     <div class="service-card" onclick="selectService(this)"
+         data-service="Cabelos Cacheados" data-duration="60min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🌀</div>
+      <div class="service-name">Cabelos Cacheados</div>
+      <div class="service-desc">Tratamento especializado para cachos com hidratação profunda e definição perfeita.</div>
+      <div class="service-tag">especial</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Corte com Navalha" data-duration="45min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🪒</div>
+      <div class="service-name">Corte com Navalha</div>
+      <div class="service-desc">Acabamento refinado com navalha profissional para um resultado limpo e preciso.</div>
+      <div class="service-tag">navalha</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Corte com Tesoura" data-duration="45min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">✂️</div>
+      <div class="service-name">Corte com Tesoura</div>
+      <div class="service-desc">Corte artesanal com tesoura para textura natural e movimento perfeito.</div>
+      <div class="service-tag">tesoura</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Corte em Degradê" data-duration="45min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">⚡</div>
+      <div class="service-name">Corte em Degradê</div>
+      <div class="service-desc">Fade impecável com transição suave e acabamento premium.</div>
+      <div class="service-tag">degradê</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Corte de Cabelo Longo" data-duration="50min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">💈</div>
+      <div class="service-name">Corte de Cabelo Longo</div>
+      <div class="service-desc">Corte especializado para cabelos longos com técnicas que valorizam o comprimento.</div>
+      <div class="service-tag">longo</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Corte Personalizado" data-duration="60min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🎯</div>
+      <div class="service-name">Corte Personalizado</div>
+      <div class="service-desc">Corte exclusivo criado especialmente para o seu estilo e estrutura facial.</div>
+      <div class="service-tag">exclusivo</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Cortes Infantis" data-duration="30min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🧒</div>
+      <div class="service-name">Cortes Infantis</div>
+      <div class="service-desc">Atendimento especial e carinhoso para as crianças, com paciência e cuidado.</div>
+      <div class="service-tag">kids</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Condicionamento de Barba" data-duration="30min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🧴</div>
+      <div class="service-name">Condicionamento de Barba</div>
+      <div class="service-desc">Hidratação profunda e tratamento para deixar sua barba macia e saudável.</div>
+      <div class="service-tag">barba</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Manutenção de Barba" data-duration="30min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">✂</div>
+      <div class="service-name">Manutenção de Barba</div>
+      <div class="service-desc">Aparar, alinhar e manter sua barba sempre no ponto certo entre os cortes.</div>
+      <div class="service-tag">barba</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Barbear com Toalha Quente" data-duration="40min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🔥</div>
+      <div class="service-name">Barbear com Toalha Quente</div>
+      <div class="service-desc">Relaxamento profundo com toalha quente, amolecendo os pelos para um barbear perfeito.</div>
+      <div class="service-tag">premium</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Raspar a Cabeça" data-duration="30min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🪄</div>
+      <div class="service-name">Raspar a Cabeça</div>
+      <div class="service-desc">Raspagem total com cuidado e precisão para um visual limpo e marcante.</div>
+      <div class="service-tag">navalha</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
+         data-service="Bar e Barbearia" data-duration="90min">
+      <div class="service-check">✔</div>
+      <div class="service-icon">🥃</div>
+      <div class="service-name">Bar e Barbearia</div>
+      <div class="service-desc">Serviço completo com drink especial incluído. Relaxe enquanto cuida do seu visual.</div>
+      <div class="service-tag">exclusivo</div>
+    </div>
+
+    <div class="service-card" onclick="selectService(this)"
          data-service="Pacote para Noivos" data-duration="120min">
       <div class="service-check">✔</div>
       <div class="service-icon">💍</div>
@@ -1035,20 +1346,20 @@
     </div>
 
     <div class="service-card" onclick="selectService(this)"
-         data-service="Serviço Doméstico (Atendimento em Casa)" data-duration="60min">
+         data-service="Serviço Noturno" data-duration="60min">
       <div class="service-check">✔</div>
-      <div class="service-icon">🏠</div>
-      <div class="service-name">Atendimento Doméstico</div>
-      <div class="service-desc">O profissional vai até você. Conforto e qualidade no seu lar, no horário que preferir.</div>
-      <div class="service-tag">domiciliar</div>
+      <div class="service-icon">🌙</div>
+      <div class="service-name">Serviço Noturno</div>
+      <div class="service-desc">Atendimento especial no período noturno para quem prefere mais tranquilidade e exclusividade.</div>
+      <div class="service-tag">noturno</div>
     </div>
 
     <div class="service-card" onclick="selectService(this)"
-         data-service="Atendimento com Hora Marcada" data-duration="45min">
+         data-service="Reserva Online" data-duration="45min">
       <div class="service-check">✔</div>
-      <div class="service-icon">⏰</div>
-      <div class="service-name">Hora Marcada Prioritária</div>
-      <div class="service-desc">Agendamento prioritário sem fila de espera. Chegou, foi atendido, saiu impecável.</div>
+      <div class="service-icon">📱</div>
+      <div class="service-name">Reserva Online</div>
+      <div class="service-desc">Agende online com facilidade e garantia de horário sem fila de espera.</div>
       <div class="service-tag">prioridade</div>
     </div>
 
@@ -1138,7 +1449,7 @@
     </div>
     <div class="summary-row">
       <span class="summary-key">Local</span>
-      <span class="summary-val" style="font-size:0.8rem;">Av. São Bernardo, 357 — Diadema, SP</span>
+      <span class="summary-val" style="font-size:0.8rem;">R. Bararua, 202 — Eldorado, Diadema, SP</span>
     </div>
   </div>
 
@@ -1188,7 +1499,7 @@
     </div>
 
     <div class="reviews-cta">
-      <a href="https://www.google.com/search?q=Barbearia+KAIROS" target="_blank" class="google-badge">
+      <a href="https://www.google.com/search?q=Diogo+Barbershop+Diadema" target="_blank" class="google-badge">
         <span>⭐</span>
         <span><strong>4,9</strong> de 5 estrelas &nbsp;·&nbsp; <strong>+50 avaliações</strong> no Google</span>
         <span style="color:var(--text-muted); font-size:0.75rem;">Ver todas →</span>
@@ -1209,9 +1520,9 @@
         <div>
           <div class="info-label">Endereço</div>
           <div class="info-val">
-            Av. São Bernardo, 357<br>
-            Jardim União — Diadema, SP<br>
-            CEP 09981-010
+            R. Bararua, 202<br>
+            Eldorado — Diadema, SP<br>
+            CEP 09971-010
           </div>
         </div>
       </div>
@@ -1221,7 +1532,17 @@
         <div>
           <div class="info-label">WhatsApp</div>
           <div class="info-val">
-            <a href="https://wa.me/5511947790902" target="_blank">(11) 94779-0902</a>
+            <a href="https://wa.me/5511988200036" target="_blank">(11) 98820-0036</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📸</div>
+        <div>
+          <div class="info-label">Instagram</div>
+          <div class="info-val">
+            <a href="https://www.instagram.com/diog_obarbe/" target="_blank">@diog_obarbe</a>
           </div>
         </div>
       </div>
@@ -1247,9 +1568,9 @@
     </div>
 
     <div>
-      <a class="map-placeholder" href="https://maps.google.com/?q=Av.+São+Bernardo,+357,+Diadema,+SP" target="_blank">
+      <a class="map-placeholder" href="https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjAy47m3bGUAxUAAAAAHQAAAAAQBg..i&client=opera-gx" target="_blank">
         <div class="map-icon">🗺</div>
-        <div class="map-text">Av. São Bernardo, 357<br>Jardim União — Diadema, SP</div>
+        <div class="map-text">R. Bararua, 202<br>Eldorado — Diadema, SP</div>
         <div class="map-link">Abrir no Google Maps →</div>
       </a>
     </div>
@@ -1258,21 +1579,21 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Barbearia Kairos</div>
-  <div class="footer-tagline">O momento certo para o seu melhor visual</div>
+  <div class="footer-logo">Diogo Barbershop</div>
+  <div class="footer-tagline">Estilo e Precisão em cada detalhe</div>
   <div class="footer-info">
-    Av. São Bernardo, 357 — Jardim União, Diadema - SP &nbsp;·&nbsp; CEP 09981-010<br>
+    R. Bararua, 202 — Eldorado, Diadema - SP &nbsp;·&nbsp; CEP 09971-010<br>
     Seg a Sáb: 9h às 20h &nbsp;·&nbsp; Dom: Fechado<br>
-    WhatsApp: <a href="https://wa.me/5511947790902" style="color:var(--gold); text-decoration:none;">(11) 94779-0902</a>
+    WhatsApp: <a href="https://wa.me/5511988200036" style="color:var(--gold); text-decoration:none;">(11) 98820-0036</a>
   </div>
   <div class="footer-divider"></div>
-  <div class="footer-copy">© 2025 Barbearia Kairos &nbsp;·&nbsp; Diadema — SP</div>
+  <div class="footer-copy">© 2025 Diogo Barbershop &nbsp;·&nbsp; Diadema — SP</div>
 </footer>
 
 <script>
-  const BARBER_PHONE = '5511947790902';
-  const BARBER_NAME_SHOP = 'Barbearia Kairos';
-  const BARBER_ADDRESS = 'Av. São Bernardo, 357 - Jardim União, Diadema - SP, 09981-010';
+  const BARBER_PHONE = '5511988200036';
+  const BARBER_NAME_SHOP = 'Diogo Barbershop';
+  const BARBER_ADDRESS = 'R. Bararua, 202 - Eldorado, Diadema - SP, 09971-010';
 
   let selectedService = null;
   let selectedDate = null;
@@ -1325,7 +1646,24 @@
     viewMonth += dir;
     if (viewMonth > 11) { viewMonth = 0; viewYear++; }
     if (viewMonth < 0) { viewMonth = 11; viewYear--; }
-    renderCalendar();
+  
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  renderCalendar();
     selectedDate = null; selectedTime = null;
     document.getElementById('timeGrid').style.display = 'none';
     document.getElementById('noDateMsg').style.display = 'block';
@@ -1418,7 +1756,7 @@
     const pad = n => String(n).padStart(2, '0');
     const fmt = d => `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
     const title = `✂ ${selectedService ? selectedService.name : 'Barbearia'} — ${BARBER_NAME_SHOP}`;
-    const details = `Serviço: ${selectedService ? selectedService.name : ''}\nCliente: ${name}\nWhatsApp da Barbearia: (11) 94779-0902`;
+    const details = `Serviço: ${selectedService ? selectedService.name : ''}\nCliente: ${name}\nWhatsApp da Barbearia: (11) 98820-0036`;
     const url = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
       `&text=${encodeURIComponent(title)}` +
       `&dates=${fmt(start)}/${fmt(end)}` +
@@ -1433,6 +1771,23 @@
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
   }
 
   renderCalendar();
